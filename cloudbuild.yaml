@@ -1,7 +1,5 @@
 steps:
 - name: gcr.io/cloud-builders/npm
   args: ["install"]
-- name: gcr.io/cloud-builders/docker
-  args: ["build", "-t", "gcr.io/arbit-400006/my-vue-app:latest", "."]
 - name: gcr.io/cloud-builders/gcloud
-  args: ["app", "deploy", "--image", "gcr.io/arbit-400006/my-vue-app:latest"]
+  args: ["app", "deploy", "--version", "latest"]
