@@ -1,4 +1,4 @@
-# arbfe
+# ChainsDetect
 
 ## Project setup
 ```
