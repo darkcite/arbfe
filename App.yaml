@@ -12,3 +12,20 @@ resources:
   cpu: 1
   memory_gb: 0.5
   disk_size_gb: 10
+liveness_check:
+  path: "/"
+
+readiness_check:
+  path: "/"
+
+handlers:
+- url: /.*
+  static_files: dist/index.html
+  upload: dist/index.html
+  http_headers:
+    Cache-Control: "no-store"
+
+# Serve all static files with urls ending in filename extensions.
+- url: /(.*\..+)$
+  static_files: dist/\1
+  upload: dist/.*\..+
