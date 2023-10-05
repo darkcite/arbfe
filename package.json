@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@vue/cli-service": "~5.0.0",
-    "@walletconnect/qrcode-modal": "^1.8.0",
     "assert": "^2.1.0",
     "axios": "^1.5.1",
     "buffer": "^6.0.3",
