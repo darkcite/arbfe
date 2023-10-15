@@ -25,10 +25,10 @@
         <tbody>
           <tr v-for="entry in arbitrageData" :key="entry.chain.buy_currency + entry.chain.sell_currency">
             <td>{{ entry.chain.buy_currency }}</td>
-            <td>{{ entry.chain.buy_rate.rate }}</td>
+            <td>{{ parseFloat(entry.chain.buy_rate.rate).toFixed(4) }}</td>
             <td>>USDT></td>
             <td>{{ entry.chain.sell_currency }}</td>
-            <td>{{ entry.chain.sell_rate.rate }}</td>
+            <td>{{ parseFloat(entry.chain.sell_rate.rate).toFixed(4) }}</td>
             <td>{{ entry.profitability.toFixed(2) }}</td>
             <td>{{ entry.buy_difference_percentage.toFixed(2) }}</td>
             <td>{{ entry.sell_difference_percentage.toFixed(2) }}</td>
