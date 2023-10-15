@@ -8,38 +8,39 @@
     <!-- Spinner while loading data -->
     <div v-if="isFetchingData" class="loader"></div>
 
-    <div v-if="isAuthenticated && !isFetchingData && Object.keys(arbitrageData).length">
+    <div v-if="isAuthenticated && !isFetchingData && arbitrageData.length">
       <table>
         <thead>
           <tr>
             <th>Fiat Buy</th>
-            <th>Buy Bank</th>
             <th>Buy Price</th>
             <th>>USDT></th>
             <th>Fiat Sell</th>
-            <th>Sell Bank</th>
             <th>Sell Price</th>
-            <th>Profit</th>
+            <th>Profitability (%)</th>
+            <th>Buy Currency Diff (%)</th>
+            <th>Sell Currency Diff (%)</th>
           </tr>
         </thead>
         <tbody>
-          <template v-for="fiat in Object.keys(arbitrageData)">
-            <tr v-for="(entry, index) in Object.values(arbitrageData[fiat])" :key="index">
-              <td>{{ entry.fiat_buy }}</td>
-              <td>{{ entry.buy_bank }}</td>
-              <td>{{ entry.buy_price }}</td>
-              <td>>USDT></td>
-              <td>{{ entry.fiat_sell }}</td>
-              <td>{{ entry.sell_bank }}</td>
-              <td>{{ entry.sell_price }}</td>
-              <td>{{ entry.percentage_difference_usd }}%</td>
-            </tr>
-          </template>
+          <tr v-for="entry in arbitrageData" :key="entry.chain.buy_currency + entry.chain.sell_currency">
+            <td>{{ entry.chain.buy_currency }}</td>
+            <td>{{ entry.chain.buy_rate.rate }}</td>
+            <td>>USDT></td>
+            <td>{{ entry.chain.sell_currency }}</td>
+            <td>{{ entry.chain.sell_rate.rate }}</td>
+            <td>{{ entry.profitability.toFixed(2) }}</td>
+            <td>{{ entry.buy_difference_percentage.toFixed(2) }}</td>
+            <td>{{ entry.sell_difference_percentage.toFixed(2) }}</td>
+          </tr>
         </tbody>
       </table>
     </div>
   </div>
 </template>
+
+<!-- Remaining script remains unchanged -->
+
 
 
 <script>
@@ -141,15 +142,21 @@ td {
 .loader {
   border: 4px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
-  border-top: 4px solid #0f0; /* Green color to match the theme */
+  border-top: 4px solid #0f0;
+  /* Green color to match the theme */
   width: 40px;
   height: 40px;
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 button {
